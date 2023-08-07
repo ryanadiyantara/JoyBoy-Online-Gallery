@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&family=Poppins:wght@200;300;500&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --main-color: #E49400;
+    --font-weight-light: 300;
+}
+
+.navbar{
+    background-color: white;
+    
+}
+
+.theme-text{
+    color: var(--main-color);
+}
+
+#login{
+    background: var(--main-color);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+}
+
+#login:hover{
+    background: #E2C083;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+}
+
+#hero {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(21, 27, 26, 0.7);
+    overflow: hidden;
+    padding: 0;
+  }
+  
+  #hero .carousel-item {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  #hero .carousel-item::before {
+    content: "";
+    background-color: rgba(21, 27, 26, 0.7);
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+  
+  #hero .carousel-container {
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  #hero .carousel-content {
+    text-align: center;
+  }
+
+  #hero h2 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 48px;
+    font-weight: 700;
+  }
+  
+  #hero p {
+    width: 80%;
+    animation-delay: 0.4s;
+    margin: 0 auto 30px auto;
+    color: #fff;
+  }
+  
+  #hero .carousel-inner .carousel-item {
+    transition-property: opacity;
+    background-position: center top;
+  }
+
+  .link{
+    color: #E49400;
+    text-decoration: none;
+  }
+
+  .link:hover{
+    color: #E2C083;
+  }
+
+  .btn-gmail{
+    height: 45px;
+    border: 2px solid grey;
+    border-radius: 20px;
+  }
+
+  .img-google{
+    height: 20px;
+    width: 20px;
+  }
+
+  .btn-signup{
+    background: var(--main-color);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+}
+
+.btn-signup:hover{
+    background: #E2C083;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+}
