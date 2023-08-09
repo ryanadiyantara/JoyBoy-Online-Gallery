@@ -20,28 +20,26 @@
             </div>
             <div class="modal-body">
               <div class="d-grid mt-2 mb-4">
-                <a href="/auth/google" class="btn btn-gmail">
                   <button class="btn btn-light btn-gmail"><img src="image/google.png" class="img-google me-3">Continue with Google</button>
-                </a>
                 </div>
               <div class="text-muted"><center>or</center></div>
-              <form action="">
+              <form id="loginForm" action="/signin" method="post">
                 <div class="form-group">
                   <label for="">Email</label>
-                  <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="">
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email" value="" required>
                 </div>
                 <br>
                 <div class="form-group">
                   <label for="">Password</label>
-                  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Password" value="" required>
                 </div>
                 <br>
                 <div>
                   <label for="">Not registered yet? <a href="#" class="link" data-bs-toggle="modal" data-bs-target=".modal-signup">Create an account</a></label>
                  </div>
                  <div class="modal-footer mt-3">
-                  <input type="submit" id="login" value="Log in" class="btn" formaction="home.html"></input>
-                  <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                  <button id="btnSubmit" type="submit" class="btn btn-signup" data-bs-dismiss="modal">Log in</button>
+                  <button id="btnCancel" type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
                 </div>
               </form>
             </div> 
@@ -63,28 +61,24 @@
                 <button type="submit" class="btn btn-light btn-gmail"><img src="image/google.png" alt="" class="img-google me-3">Continue with Google</button>
               </div>
               <div class="text-muted"><center>or</center></div>
-              <form action="">
-                <div class="form-group">
-                  <label for="">Name</label>
-                  <input type="text" id="name" name="name" class="form-control" placeholder="Name" required="">
-                </div>
+              <form action="/signup" method="post">
                 <br>
                 <div class="form-group">
                   <label for="">Email</label>
-                  <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="">
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email" value="" required>
                 </div>
                 <br>
                 <div class="form-group">
                   <label for="">Password</label>
-                  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Password" value="" required>
                 </div>
                 <br>
                 <div>
                   <label for="">Already have an account? <a href="" class="link" data-bs-toggle="modal" data-bs-target=".modal-login">Login</a></label>
                  </div>
-                 <div class="modal-footer mt-3">
-                  <input type="submit" id="signup" class="btn btn-signup" value="Sign up" formaction="home.html">
-                  <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                 <div class="modal-footer mt-3">                  
+                  <button id="btnSubmit" type="submit" class="btn btn-signup" data-bs-dismiss="modal">Sign up</button>
+                  <button id="btnCancel" type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
                 </div>
               </form>
             </div>  
@@ -255,7 +249,5 @@
   </center>
   </footer>
   <!--END-->
-
-
   </body>
 </html>

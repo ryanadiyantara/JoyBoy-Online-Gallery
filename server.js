@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const bcrypt = require("bcrypt");
 
 // Untuk Membaca File + Upload File
 const multer = require("multer");
@@ -15,16 +16,16 @@ admin.initializeApp({
   storageBucket: "gs://joyboy-online-gallery.appspot.com/",
 });
 
-const firebase = require("firebase");
-const firebaseConfig = {
-  apiKey: "AIzaSyAlaQKXOuCblaV13luqoag0NYhnFJzL-6A",
-  authDomain: "joyboy-online-gallery.firebaseapp.com", //ganti pake domain hosting
-  projectId: "joyboy-online-gallery",
-  storageBucket: "joyboy-online-gallery.appspot.com",
-  messagingSenderId: "1061356397950",
-  appId: "1:1061356397950:web:57c34911255f45b9723f2f",
-};
-firebase.initializeApp(firebaseConfig);
+// const firebase = require("firebase");
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAlaQKXOuCblaV13luqoag0NYhnFJzL-6A",
+//   authDomain: "joyboy-online-gallery.firebaseapp.com", //ganti pake domain hosting
+//   projectId: "joyboy-online-gallery",
+//   storageBucket: "joyboy-online-gallery.appspot.com",
+//   messagingSenderId: "1061356397950",
+//   appId: "1:1061356397950:web:57c34911255f45b9723f2f",
+// };
+// firebase.initializeApp(firebaseConfig);
 
 // API Middlewares
 app.use(express.json());
@@ -44,14 +45,14 @@ app.get("/login", (req, res) => {
 });
 
 // Auth Check
-function checkAuth(req, res, next) {
-  if (req.session.user) {
-    next(); // Lanjutkan jika pengguna sudah masuk
-  } else {
-    res.redirect("/login"); // Redirect ke halaman login jika pengguna belum masuk
-  }
-}
-app.get("/home", checkAuth, (req, res) => {
+// function checkAuth(req, res, next) {
+//   if (req.session.user) {
+//     next(); // Lanjutkan jika pengguna sudah masuk
+//   } else {
+//     res.redirect("/login"); // Redirect ke halaman login jika pengguna belum masuk
+//   }
+// }
+app.get("/home", (req, res) => {
   res.sendFile(__dirname + "/public/home.html");
 });
 
@@ -83,56 +84,61 @@ app.get("/read/photos", async (req, res) => {
 });
 
 // Signup Google
-app.get("/auth/google", (req, res) => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-      // Setelah autentikasi berhasil, Anda dapat menyimpan informasi pengguna dalam sesi
-      const user = result.user;
-      req.session.user = user;
-      res.redirect("/home"); // Ubah URL sesuai halaman yang Anda inginkan
-    })
-    .catch((error) => {
-      res.status(500).send(error.message);
+// app.get("/auth/google", (req, res) => {
+//   const provider = new firebase.auth.GoogleAuthProvider();
+//   firebase
+//     .auth()
+//     .signInWithPopup(provider)
+//     .then((result) => {
+//       // Setelah autentikasi berhasil, Anda dapat menyimpan informasi pengguna dalam sesi
+//       const user = result.user;
+//       req.session.user = user;
+//       res.redirect("/home"); // Ubah URL sesuai halaman yang Anda inginkan
+//     })
+//     .catch((error) => {
+//       res.status(500).send(error.message);
+//     });
+// });
+
+// Signup Udah BISA
+app.post("/signup", async (req, res) => {
+  console.log(req.body);
+  const user = {
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  try {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const userResponse = await admin.auth().createUser({
+      email: user.email,
+      password: hashedPassword,
+      emailVerified: false,
+      disabled: false,
     });
+    res.redirect("/home");
+  } catch (error) {
+    res.redirect("/login");
+  }
 });
 
-// Signup Biasa BISA
-// app.post("/signup", async (req, res) => {
-//   console.log(req.body);
-//   const user = {
-//     email: req.body.email,
-//     password: req.body.password,
-//   };
-//   const userResponse = await admin.auth().createUser({
-//     email: user.email,
-//     password: user.password,
-//     emailVerified: false,
-//     disabled: false,
-//   });
-//   res.json(userResponse);
-// });
+// Signin / Login
+app.post("/signin", async (req, res) => {
+  console.log(req.body);
+  const { email, password } = req.body;
+  try {
+    const userCredential = await admin.auth().getUserByEmail(email);
 
-// Login Biasa Gabisa
-// app.post("/login", (req, res) => {
-//   const adminCredentials = {
-//     username: "superadmin",
-//     password: "admin123",
-//   };
-//   const user = {
-//     email: req.body.email,
-//     password: req.body.password,
-//   };
+    // Verifikasi kata sandi
+    const user = await admin.auth().updateUser(userCredential.uid, {
+      password: password,
+    });
 
-//   if (user.email === adminCredentials.username && user.password === adminCredentials.password) {
-//     // Successful login
-//     res.redirect("./pages.dashboard.html"); // Redirect to the dashboard or desired page
-//   } else {
-//     res.status(401).send("Invalid Credentials");
-//   }
-// });
+    res.redirect("/home");
+  } catch (error) {
+    res.redirect("/login");
+  }
+});
 
 //Port Test Lokal
 const PORT = process.env.PORT || 8080;
