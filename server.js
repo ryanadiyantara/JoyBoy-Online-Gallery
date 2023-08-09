@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const session = require("express-session");
 
 // Untuk Membaca File + Upload File
 const multer = require("multer");
@@ -14,11 +15,30 @@ admin.initializeApp({
   storageBucket: "gs://joyboy-online-gallery.appspot.com/",
 });
 
-//API Middlewares
+const firebase = require("firebase");
+const firebaseConfig = {
+  apiKey: "AIzaSyAlaQKXOuCblaV13luqoag0NYhnFJzL-6A",
+  authDomain: "joyboy-online-gallery.firebaseapp.com", //ganti pake domain hosting
+  projectId: "joyboy-online-gallery",
+  storageBucket: "joyboy-online-gallery.appspot.com",
+  messagingSenderId: "1061356397950",
+  appId: "1:1061356397950:web:57c34911255f45b9723f2f",
+};
+firebase.initializeApp(firebaseConfig);
+
+// API Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: false })); // Baca Form
 app.use(express.static("public")); // Baca Direktori Page
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: true,
+  })
+); // Inisialisasi session
+
 app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/public/index.html"); // Baca Direktori Page
 });
@@ -62,7 +82,24 @@ app.get("/read/photos", async (req, res) => {
   }
 });
 
-//Signup Biasa BISA
+// Signup Google
+app.get("/auth/google", (req, res) => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      // Setelah autentikasi berhasil, Anda dapat menyimpan informasi pengguna dalam sesi
+      const user = result.user;
+      req.session.user = user;
+      res.redirect("/home"); // Ubah URL sesuai halaman yang Anda inginkan
+    })
+    .catch((error) => {
+      res.status(500).send(error.message);
+    });
+});
+
+// Signup Biasa BISA
 // app.post("/signup", async (req, res) => {
 //   console.log(req.body);
 //   const user = {
