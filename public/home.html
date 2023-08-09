@@ -3,12 +3,88 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Venus</title>
+    <title>JoyBoy - Online Photo Gallery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheet.css">
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    hello world
+    
+    <!--MODAL LOGOUT-->
+    <div class="modal modal-logout" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Are you sure want to log out?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+                <div>
+                  <center>
+                <input type="submit" id="logout" value="Log Out" class="btn" formaction="index.html"></input>
+                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+              </center>
+              </div>
+            </form>
+          </div> 
+        </div>
+      </div>
+    </div>
+
+    <!--NAVBAR-->
+    <nav class="navbar container-fluid navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand theme-text" href="#">JoyBoy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-nav me-auto mb-2 mb-lg-0">
+            <form class="d-flex nav-search" role="search">
+              <input class="form-control me-2 fw-light" id="search" type="search" placeholder="Search photos" aria-label="Search">
+              <button class="btn btn-search" type="submit">Search</button>
+            </form>
+          </div>
+          <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <form action="">
+              <input type="button" class="btn btn-logout" value="Log Out" data-bs-toggle="modal" data-bs-target=".modal-logout">
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!--GALLERY-->
+    <div class="container d-flex cards-wrapper pt-5 mb-5">
+      <div class="custom-container" id="galleryList">
+        <!-- Fetch Data Gallery-->
+      </div>
+    </div>
+
+    <script>
+      // Load Foto
+      async function fetchPhotos() {
+        const response = await fetch("/read/photos");
+        const data = await response.json();
+        const photoList = document.getElementById("galleryList");
+        data.forEach((gallery) => {
+          const photoDiv = document.createElement("div");
+          photoDiv.className = "custom-box";
+          photoDiv.innerHTML = `
+            <div class="card" >
+              <img src="${gallery.imageURL}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title" id="title">${gallery.title}</h5>
+                <p class="card-text" id="description">${gallery.description}</p>
+              </div>
+              <a href="${gallery.imageURL}?alt=media" class="btn btn-download" download="${gallery.title}"><img src="image/download.png" class="img-download me-2">Download</a>
+            </div>
+          `;
+          photoList.appendChild(photoDiv);
+        });
+      }
+      fetchPhotos();
+    </script>
   </body>
 </html>

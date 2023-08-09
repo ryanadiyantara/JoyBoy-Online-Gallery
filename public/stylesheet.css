@@ -1,133 +1,386 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&family=Poppins:wght@200;300;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&family=Poppins:wght@200;300;500&display=swap");
 
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-:root{
-    --main-color: #E49400;
-    --font-weight-light: 300;
+:root {
+  --main-color: #b10a47;
+  --font-weight-light: 300;
 }
 
-.navbar{
-    background-color: white;
-    
+.navbar {
+  background-color: white;
 }
 
-.theme-text{
-    color: var(--main-color);
+.theme-text {
+  color: var(--main-color);
 }
 
-#login{
-    background: var(--main-color);
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: white;
+#login {
+  background: var(--main-color);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: white;
 }
 
-#login:hover{
-    background: #E2C083;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: white;
+#login:hover {
+  background: #ff80aa;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: white;
 }
 
 #hero {
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(21, 27, 26, 0.7);
-    overflow: hidden;
-    padding: 0;
+  width: 100%;
+  height: 120vh;
+
+  overflow: hidden;
+  padding: 0;
+}
+
+#hero .carousel-item {
+  width: 100%;
+  height: 120vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#hero .carousel-item::before {
+  content: "";
+
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#hero .carousel-container {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 500px;
+}
+
+#hero .carousel-content {
+  text-align: center;
+}
+
+#hero h2 {
+  color: #000;
+  margin-bottom: 30px;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+#hero h5 {
+  width: 80%;
+  font-weight: 500;
+  animation-delay: 0.4s;
+  margin: 0 auto 30px auto;
+}
+
+#hero .carousel-inner .carousel-item {
+  transition-property: opacity;
+  background-position: center top;
+}
+
+.link {
+  color: #b10a47;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #e2c083;
+}
+
+.btn-gmail {
+  height: 45px;
+  border: 2px solid grey;
+  border-radius: 20px;
+}
+
+.img-google {
+  height: 20px;
+  width: 20px;
+}
+
+.btn-signup {
+  background: var(--main-color);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: white;
+}
+
+.btn-signup:hover {
+  background: #ff80aa;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: white;
+}
+
+.btn-search {
+  border-color: #b10a47;
+  color: #ff80aa;
+}
+
+#logout:hover {
+  color: grey;
+}
+
+.card,
+.card-img-top {
+  border-radius: 15px;
+}
+
+.btn-download {
+  background-color: #ececec;
+  color: black;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.btn-download:hover {
+  background-color: #cecece;
+  color: black;
+}
+
+.img-download {
+  width: 17px;
+  height: 17px;
+}
+
+.btn-search,
+#search {
+  border-radius: 20px;
+}
+
+#search {
+  background-color: #f7f7f7;
+}
+
+.btn-search:hover {
+  background-color: #b10a47;
+  color: white;
+}
+
+.card-text {
+  color: #9d9d9d;
+  font-weight: 300;
+}
+
+#logout {
+  background-color: #e34c4d;
+  color: white;
+}
+
+#logout:hover {
+  background-color: #e09e9e;
+  color: white;
+}
+
+.btn-cancel {
+  color: #737373;
+}
+
+.btn-login {
+  background-color: #b10a47;
+  color: white;
+}
+
+.btn-login:hover {
+  background-color: #ff80aa;
+  color: white;
+}
+
+.btn-logout:hover {
+  color: #b8b8b8;
+}
+
+section.hero-2 {
+  width: 100%;
+  height: 95vh;
+  background-color: #ffeec2;
+  overflow: hidden;
+  padding: 0;
+}
+
+.cont-hero2 {
+  padding-top: 90px;
+  padding-bottom: 250px;
+  color: #b10a47;
+}
+
+.sign-up {
+  color: #b10a47;
+}
+
+.sign-up:hover {
+  color: #e06464;
+}
+
+.img-search {
+  width: 30px;
+  height: 30px;
+}
+
+.btn-hero-1 {
+  background-color: white;
+  border-radius: 100px;
+}
+
+.btn-hero-1:hover {
+  background-color: #e7e7e7;
+  color: black;
+}
+
+section.hero-3 {
+  width: 100%;
+  height: 95vh;
+  overflow: hidden;
+  padding: 0;
+}
+
+.cont-hero3 {
+  padding-top: 90px;
+  padding-bottom: 250px;
+  color: #b10a47;
+}
+
+.btn-hero-2 {
+  background-color: #b10a47;
+  color: white;
+  border-radius: 100px;
+}
+
+.btn-hero-2:hover {
+  background-color: #e06464;
+  color: white;
+}
+
+.custom-container {
+  width: 1400px;
+  margin: 20px auto;
+  columns: 4;
+  column-gap: 30px;
+}
+
+.custom-box {
+  width: 100%;
+  margin-bottom: 30px;
+  break-inside: avoid;
+}
+
+@media only screen and (min-width: 992px) {
+  #search {
+    width: 920px;
+    justify-self: center;
   }
-  
-  #hero .carousel-item {
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+
+  .btn-download {
   }
-  
-  #hero .carousel-item::before {
-    content: "";
-    background-color: rgba(21, 27, 26, 0.7);
-    position: absolute;
-    height: 100vh;
-    width: 100%;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+
+  .nav-search {
+    margin-left: 55px;
   }
-  
-  #hero .carousel-container {
-    color:white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
+
+  .text-hero-1 {
+    padding-top: 130px;
+    padding-left: 100px;
   }
-  
-  #hero .carousel-content {
+
+  .img-hero-1 {
+    width: 700px;
+    height: 550px;
+  }
+
+  .text-middle {
+    font-size: x-large;
+  }
+
+  .btn-hero-1 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: large;
+  }
+
+  .btn-hero-2 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: larger;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .custom-container {
+    columns: 3;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .content-mid {
     text-align: center;
   }
 
-  #hero h2 {
-    color: #fff;
-    margin-bottom: 30px;
-    font-size: 48px;
-    font-weight: 700;
-  }
-  
-  #hero p {
-    width: 80%;
-    animation-delay: 0.4s;
-    margin: 0 auto 30px auto;
-    color: #fff;
-  }
-  
-  #hero .carousel-inner .carousel-item {
-    transition-property: opacity;
-    background-position: center top;
+  .img-hero-1 {
+    align-items: center;
   }
 
-  .link{
-    color: #E49400;
-    text-decoration: none;
+  .btn-hero-1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .link:hover{
-    color: #E2C083;
+  .img-download {
+    width: 10px;
+    height: 10px;
   }
 
-  .btn-gmail{
-    height: 45px;
-    border: 2px solid grey;
-    border-radius: 20px;
+  .btn-download {
+    width: 92px;
+    height: 25px;
+    font-size: 8px;
+    margin: auto;
+    margin-bottom: 10px;
   }
 
-  .img-google{
-    height: 20px;
-    width: 20px;
+  .card-body {
+    padding-left: 10px;
   }
 
-  .btn-signup{
-    background: var(--main-color);
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: white;
-}
+  .card-title {
+    font-size: x-small;
+  }
 
-.btn-signup:hover{
-    background: #E2C083;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: white;
+  .card-text {
+    font-size: xx-small;
+  }
+
+  .card,
+  .card-img-top {
+    border-radius: 10px;
+  }
+
+  .custom-container {
+    columns: 2;
+  }
 }
